@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Employee</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/departments">Employee Management</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/employees}">Manage Employees</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/departments}">Manage Departments</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Add Employee</h4>
+                </div>
+                <div class="card-body">
+                    <!-- Employee Form -->
+                    <form th:action="@{/employees/save}" th:object="${employee}" method="post">
+                        
+                        <!-- Employee Name -->
+                        <div class="mb-3">
+                            <label class="form-label">Employee Name</label>
+                            <input type="text" th:field="*{name}" class="form-control" placeholder="Enter employee name" required>
+                        </div>
+
+                        <!-- Department Selection -->
+                        <div class="mb-3">
+                            <label class="form-label">Department</label>
+                            <select th:field="*{department.id}" class="form-select" required>
+                                <option value="">Select Department</option>
+                                <option th:each="dept : ${departments}" th:value="${dept.id}" th:text="${dept.name}"></option>
+                            </select>
+                        </div>
+
+                        <!-- Submit & Back Buttons -->
+                        <div class="d-flex justify-content-between">
+                            <a th:href="@{/employees}" class="btn btn-secondary">Back</a>
+                            <button type="submit" class="btn btn-success">Save Employee</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

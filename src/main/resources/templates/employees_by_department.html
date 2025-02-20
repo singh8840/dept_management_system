@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employees of Department</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container mt-4">
+        <h1>Employees in <span th:text="${department.name}"></span> Department</h1>
+        <a th:href="@{/employees/new}" class="btn btn-primary mb-3">Add Employee</a>
+        <a th:href="@{/departments}" class="btn btn-secondary mb-3">Back to Departments</a>
+
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Employee Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="emp : ${employees}">
+                    <td th:text="${emp.id}"></td>
+                    <td th:text="${emp.name}"></td>
+                    <td>
+                        <a th:href="@{/employees/edit/{id}(id=${emp.id})}" class="btn btn-warning btn-sm">Edit</a>
+                        <a th:href="@{/employees/delete/{id}(id=${emp.id})}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
